@@ -2,3 +2,5 @@ chains.json
 *.json
 .idea
 node_modules
+!package-lock.json
+!package.json
