@@ -2,12 +2,14 @@ const CHAIN_SYNCING_PAYLOAD = {
   'eth': { 'jsonrpc': '2.0', 'method': 'eth_syncing', 'params': [], 'id': 1 },
   'hmy': { 'jsonrpc': '2.0', 'method': 'hmyv2_syncing', 'params': [], 'id': 0 },
   'avax': { 'jsonrpc': '2.0', 'id': 1, 'method': 'info.isBootstrapped', 'params': { 'chain': 'P' } },
+  'sol': { 'jsonrpc': '2.0', 'id': 1, 'method': 'getHealth'},
 }
 
 const CHAIN_TYPE_PAYLOAD = {
   'eth': { 'jsonrpc': '2.0', 'method': 'eth_blockNumber', 'params': [], 'id': 1 },
   'avax': { 'jsonrpc': '2.0', 'id': 1, 'method': 'platform.getHeight', 'params': {} },
   'hmy': { 'jsonrpc': '2.0', 'method': 'hmyv2_blockNumber', 'params': [], 'id': 0 },
+  'sol': { 'jsonrpc': '2.0', 'method': 'getBlockHeight', 'params': [], 'id': 1 },
 }
 
 const CHAIN_MAP = {
@@ -146,6 +148,10 @@ const CHAIN_MAP = {
 
   '0044': {
     name: 'IoTeX Mainnet (0044)',
+    type: 'eth',
+  },
+  '0049': {
+    name: 'Fantom Mainnet (0049)',
     type: 'eth',
   },
 
