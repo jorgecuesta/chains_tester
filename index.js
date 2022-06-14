@@ -55,6 +55,7 @@ const check = async (chainData) => {
   if (syncingPayload) {
     let urlExt = chain.type === 'avax' ? '/ext/info' : ''
     const syncingResponse = await axios.post(chainData.url + urlExt, syncingPayload, {
+      
       auth: chainData.basic_auth,
       headers: {
         'Content-Type': 'application/json',
@@ -67,6 +68,8 @@ const check = async (chainData) => {
         syncStatus = syncingResponse.data.result === false ? 'Sync' : 'Syncing'
       } else if (chain.type === 'avax') {
         syncStatus = syncingResponse.data.result.isBootstrapped === true ? 'Sync' : 'Syncing'
+      } else if (chain.type === 'sol') {
+        syncStatus = syncingResponse.data.result === 'ok' ? 'Sync' : 'Syncing'
       }
     }
   }
@@ -91,6 +94,8 @@ const check = async (chainData) => {
     })
     if (heightResponse.status !== 200) console.log(`${chain.name} returns non 200 code.`)
     if (chain.type === 'eth' || chain.type === 'hmy') {
+      height = web3.utils.toNumber(heightResponse.data.result)
+    } else if(chain.type === 'sol') {
       height = web3.utils.toNumber(heightResponse.data.result)
     } else {
       height = JSON.stringify(heightResponse.data)
