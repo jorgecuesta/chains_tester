@@ -47,6 +47,14 @@ const CHAIN_MAP = {
     name: 'Avalanche Fuji (000E)',
     type: 'avax',
   },
+  '03DF': {
+    name: 'DFKchain Subnet (03DF)',
+    type: 'avax',
+  },
+  '03CB': {
+    name: 'Swimmer Network Mainnet (03CB)',
+    type: 'avax',
+  },
 
   '0004': {
     name: 'BSC Mainnet (0004)',
@@ -192,6 +200,11 @@ const CHAIN_MAP = {
   },
   '000C': {
     name: 'xDAI Archival (000C)',
+    type: 'eth',
+  },
+
+  '0053': {
+    name: 'Optimism Mainnet (0053)',
     type: 'eth',
   },
 }
