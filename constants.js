@@ -3,6 +3,7 @@ const CHAIN_SYNCING_PAYLOAD = {
   'hmy': { 'jsonrpc': '2.0', 'method': 'hmyv2_syncing', 'params': [], 'id': 0 },
   'avax': { 'jsonrpc': '2.0', 'id': 1, 'method': 'info.isBootstrapped', 'params': { 'chain': 'P' } },
   'sol': { 'jsonrpc': '2.0', 'id': 1, 'method': 'getHealth'},
+  'near': { 'jsonrpc': '2.0', 'method': 'status', 'params':[], 'id': 1}
 }
 
 const CHAIN_TYPE_PAYLOAD = {
@@ -10,6 +11,7 @@ const CHAIN_TYPE_PAYLOAD = {
   'avax': { 'jsonrpc': '2.0', 'id': 1, 'method': 'platform.getHeight', 'params': {} },
   'hmy': { 'jsonrpc': '2.0', 'method': 'hmyv2_blockNumber', 'params': [], 'id': 0 },
   'sol': { 'jsonrpc': '2.0', 'method': 'getBlockHeight', 'params': [], 'id': 1 },
+  'near': { 'jsonrpc': '2.0', 'method': 'status', 'params': [], 'id': 1 }
 }
 
 const CHAIN_MAP = {
@@ -207,6 +209,18 @@ const CHAIN_MAP = {
     name: 'Optimism Mainnet (0053)',
     type: 'eth',
   },
+  '0059': {
+    name: 'Dogechain (0059)',
+    type: 'eth',
+  },
+  '0047': {
+    name: 'OkExChain (0047)',
+    type: 'eth',
+  },
+  '0052': {
+    name: 'Near (0052)',
+    type: 'near',
+  }
 }
 
 module.exports = {

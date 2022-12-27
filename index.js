@@ -70,6 +70,8 @@ const check = async (chainData) => {
         syncStatus = syncingResponse.data.result.isBootstrapped === true ? 'Sync' : 'Syncing'
       } else if (chain.type === 'sol') {
         syncStatus = syncingResponse.data.result === 'ok' ? 'Sync' : 'Syncing'
+      } else if (chain.type === 'near') {
+        syncStatus = syncingResponse.data.result.sync_info.syncing === false ? 'Sync' : 'Syncing'
       }
     }
   }
@@ -97,6 +99,8 @@ const check = async (chainData) => {
       height = web3.utils.toNumber(heightResponse.data.result)
     } else if(chain.type === 'sol') {
       height = web3.utils.toNumber(heightResponse.data.result)
+    } else if(chain.type === 'near') {
+      height = web3.utils.toNumber(heightResponse.data.result.sync_info.latest_block_height)
     } else {
       height = JSON.stringify(heightResponse.data)
     }
