@@ -41,6 +41,8 @@ const options = commander.program.opts()
 
 const chainsFilePath = options.chains
 
+let height = 'Unavailable'
+
 const check = async (chainData) => {
   const chain = CHAIN_MAP[chainData.id]
   const heightPayload = CHAIN_TYPE_PAYLOAD[chain.type]
@@ -76,8 +78,6 @@ const check = async (chainData) => {
     }
   }
 
-  let height = 'Unavailable'
-
   if (chain.type === 'avax' && syncStatus === 'Sync') {
     const heightResponse = await axios.post(chainData.url + '/ext/P', heightPayload, {
       auth: chainData.basic_auth,
@@ -86,7 +86,9 @@ const check = async (chainData) => {
       },
     })
     if (heightResponse.status !== 200) console.log(`${chain.name} returns non 200 code.`)
-    height = heightResponse.data.result.height
+    {      
+      height = heightResponse.data.result.height
+    }
   } else if (chain.type !== 'avax') {
     const heightResponse = await axios.post(chainData.url, heightPayload, {
       auth: chainData.basic_auth,
@@ -95,7 +97,7 @@ const check = async (chainData) => {
       },
     })
     if (heightResponse.status !== 200) console.log(`${chain.name} returns non 200 code.`)
-    if (chain.type === 'eth' || chain.type === 'hmy') {
+    if (chain.type === 'eth' || chain.type === 'hmy') {      
       height = web3.utils.toNumber(heightResponse.data.result)
     } else if(chain.type === 'sol') {
       height = web3.utils.toNumber(heightResponse.data.result)
@@ -106,7 +108,9 @@ const check = async (chainData) => {
     }
   }
 
-  console.log(`${chain.name}: Height = ${height} Sync Status = ${syncStatus}`)
+  let prevHeight = CHAIN_MAP[chainData.id].height
+  console.log(`${chain.name}: Height = ${height} Sync Status = ${syncStatus}, Delta = ${height - prevHeight}`)
+  CHAIN_MAP[chainData.id].height = height  
 }
 
 const run = async () => {
